@@ -1,26 +1,19 @@
-import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
-export const ResultsContainer = styled(Box)(({ theme }) => ({
-  width: '100%',
-  maxWidth: 1200,
-  marginTop: theme.spacing(4),
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3),
-  },
-  textAlign: 'center',
+export const LoadingContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '300px',
+  padding: theme.spacing(4),
 }));
 
-export const LoadingBox = styled(Box)(({ theme }) => ({
+export const MessageContainer = styled(Box)(({ theme }) => ({
   textAlign: 'center',
-  marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(4),
+  padding: theme.spacing(4),
+  margin: theme.spacing(4, 0),
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: theme.palette.background.paper,
 }));
-
-export const noResultsText = {
-  marginTop: 4,
-  color: 'text.secondary',
-};

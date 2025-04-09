@@ -1,33 +1,37 @@
-import { ChangeEvent } from 'react';
+import React from 'react';
 import { Pagination } from '@mui/material';
 import * as S from './styles';
 
 interface PaginationControlsProps {
-  totalResults: number;
+  totalResults: number; // This now represents FILTERED total
   currentPage: number;
   onPageChange: (page: number) => void;
+  disabled?: boolean;
 }
 
-const PaginationControls = ({
+const RESULTS_PER_PAGE = 12;
+
+const PaginationControls: React.FC<PaginationControlsProps> = ({
   totalResults,
   currentPage,
   onPageChange,
-}: PaginationControlsProps) => {
-  if (totalResults <= 10) return null;
+  disabled = false,
+}) => {
+  if (totalResults <= RESULTS_PER_PAGE) return null;
 
-  const handleChange = (_: ChangeEvent<unknown>, page: number) => {
-    onPageChange(page);
-  };
+  const pageCount = Math.ceil(totalResults / RESULTS_PER_PAGE);
 
   return (
-    <S.PaginationBox>
+    <S.PaginationContainer>
       <Pagination
-        count={Math.ceil(totalResults / 12)}
+        count={pageCount}
         page={currentPage}
-        onChange={handleChange}
+        onChange={(_, page) => onPageChange(page)}
         color="primary"
+        size="large"
+        disabled={disabled}
       />
-    </S.PaginationBox>
+    </S.PaginationContainer>
   );
 };
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Grid, Typography, CircularProgress } from '@mui/material';
 import ProductCard from '../ProductCard';
 import * as S from './styles';
@@ -7,30 +8,46 @@ interface SearchResultsProps {
   results: GoogleSearchResult[];
   loading: boolean;
   query: string;
+  error: string | null;
 }
 
-const SearchResults = ({ results, loading, query }: SearchResultsProps) => {
+const SearchResults: React.FC<SearchResultsProps> = ({
+  results,
+  loading,
+  query,
+  error,
+}) => {
   if (loading) {
     return (
-      <S.LoadingBox>
-        <CircularProgress />
-        <Typography sx={{ mt: 1 }}>Loading products...</Typography>
-      </S.LoadingBox>
+      <S.LoadingContainer>
+        <CircularProgress size={60} />
+        <Typography variant="body1" mt={2}>
+          Searching products...
+        </Typography>
+      </S.LoadingContainer>
+    );
+  }
+
+  if (error) {
+    return (
+      <S.MessageContainer>
+        <Typography color="error">{error}</Typography>
+      </S.MessageContainer>
     );
   }
 
   if (results.length === 0) {
     return (
-      <Typography variant="h6" align="center" sx={S.noResultsText}>
-        {query
-          ? 'No products with images found'
-          : 'Enter a search term to begin'}
-      </Typography>
+      <S.MessageContainer>
+        <Typography variant="h6">
+          {query ? 'No products found' : 'Enter a search term to begin'}
+        </Typography>
+      </S.MessageContainer>
     );
   }
 
   return (
-    <Grid container spacing={3} justifyContent="center">
+    <Grid container spacing={4} justifyContent="center">
       {results.map((item, index) => (
         <Grid
           key={`${item.link}-${index}`}

@@ -1,19 +1,19 @@
-import { Box, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Box, Button } from '@mui/material';
 
-export const SearchBox = styled(Box)(({ theme }) => ({
-  backgroundColor: 'white',
+export const SearchContainer = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
   padding: theme.spacing(4),
   borderRadius: theme.shape.borderRadius * 2,
-  boxShadow: theme.shadows[3],
+  boxShadow: theme.shadows[2],
   width: '100%',
   maxWidth: 800,
-  textAlign: 'center',
+  margin: '0 auto',
 }));
 
 export const SearchButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  '&:hover': {
-    backgroundColor: theme.palette.primary.dark,
-  },
+  padding: theme.spacing(1.5),
+  width: '100%',
+  maxWidth: 200,
+  margin: '0 auto',
 }));

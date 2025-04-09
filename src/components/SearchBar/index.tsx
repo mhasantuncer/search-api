@@ -1,6 +1,6 @@
+import React from 'react';
 import { TextField, CircularProgress } from '@mui/material';
 import * as S from './styles';
-import { KeyboardEvent } from 'react';
 
 interface SearchBarProps {
   query: string;
@@ -9,38 +9,36 @@ interface SearchBarProps {
   onQueryChange: (value: string) => void;
 }
 
-const SearchBar = ({
+const SearchBar: React.FC<SearchBarProps> = ({
   query,
   loading,
   onSearch,
   onQueryChange,
-}: SearchBarProps) => {
-  const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      onSearch();
-    }
+}) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') onSearch();
   };
 
   return (
-    <S.SearchBox>
+    <S.SearchContainer>
       <TextField
-        label="Search Products"
+        fullWidth
+        label="Search Webhallen"
         variant="outlined"
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
-        fullWidth
         onKeyDown={handleKeyPress}
+        disabled={loading}
         sx={{ mb: 2 }}
       />
       <S.SearchButton
         variant="contained"
         onClick={onSearch}
-        disabled={loading}
-        size="large"
+        disabled={loading || !query}
       >
-        {loading ? <CircularProgress size={24} color="inherit" /> : 'Search'}
+        {loading ? <CircularProgress size={24} /> : 'Search'}
       </S.SearchButton>
-    </S.SearchBox>
+    </S.SearchContainer>
   );
 };
 

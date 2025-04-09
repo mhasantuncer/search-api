@@ -1,4 +1,5 @@
-import { CardContent, CardMedia, Typography, Box } from '@mui/material';
+import React from 'react';
+import { CardContent, Box } from '@mui/material';
 import * as S from './styles';
 import { GoogleSearchResult } from '../../models/types';
 
@@ -6,36 +7,38 @@ interface ProductCardProps {
   product: GoogleSearchResult;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const imageUrl = product.pagemap?.cse_image?.[0]?.src;
+  const truncatedTitle =
+    product.title.length > 60
+      ? `${product.title.substring(0, 60)}...`
+      : product.title;
+
   return (
     <S.ProductCard>
-      {product.pagemap?.cse_image?.[0]?.src && (
-        <CardMedia
+      {imageUrl && (
+        <Box
           component="img"
           height="200"
-          image={product.pagemap.cse_image[0].src}
+          src={imageUrl}
           alt={product.title}
-          sx={S.cardMedia}
+          sx={S.ProductImage}
         />
       )}
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h6" component="div" sx={S.cardTitle}>
-          {product.title}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={S.cardDescription}
-        >
+      <CardContent>
+        <S.ProductTitle gutterBottom variant="h6">
+          {truncatedTitle}
+        </S.ProductTitle>
+        <S.ProductDescription variant="body2" color="text.secondary">
           {product.snippet}
-        </Typography>
+        </S.ProductDescription>
       </CardContent>
-      <Box sx={{ p: 2 }}>
+      <Box p={2}>
         <S.ViewButton
           fullWidth
           variant="contained"
           href={product.link}
-          rel="noopener"
+          rel="noopener noreferrer"
         >
           View Product
         </S.ViewButton>

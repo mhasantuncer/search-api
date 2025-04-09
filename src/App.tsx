@@ -1,51 +1,63 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Container, Box } from '@mui/material';
+import useSearch from './hooks/useSearch';
+import theme from './styles/theme';
+import { ThemeProvider } from '@mui/material/styles';
+import PaginationControls from './components/PaginationControls';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
-import PaginationControls from './components/PaginationControls';
-import * as S from './styles';
-import useSearch from './hooks/useSearch';
 
-const App: React.FC = () => {
-  const [query, setQuery] = useState<string>('');
-
+const App = () => {
+  const [query, setQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
   const { results, loading, totalResults, error, handleSearch } = useSearch();
 
   const handlePageChange = (page: number) => {
+    setCurrentPage(page);
     handleSearch(query, page);
   };
 
+  const handleNewSearch = () => {
+    setCurrentPage(1);
+    handleSearch(query, 1);
+  };
+  console.log(totalResults);
   return (
-    <S.AppContainer maxWidth="lg">
-      <SearchBar
-        query={query}
-        loading={loading}
-        onSearch={() => handleSearch(query)}
-        onQueryChange={setQuery}
-      />
+    <ThemeProvider theme={theme}>
+      <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Box sx={{ mb: 6 }}>
+          <SearchBar
+            query={query}
+            loading={loading}
+            onSearch={handleNewSearch}
+            onQueryChange={setQuery}
+          />
+        </Box>
 
-      <S.ResultsContainer>
         <PaginationControls
           totalResults={totalResults}
-          currentPage={1}
+          currentPage={currentPage}
           onPageChange={handlePageChange}
+          disabled={loading}
         />
 
         <SearchResults
           results={results}
           loading={loading}
           query={query}
-          // error={error}
+          error={error}
         />
 
-        {totalResults > 10 && (
+        {totalResults > 12 && (
           <PaginationControls
             totalResults={totalResults}
-            currentPage={1}
+            currentPage={currentPage}
             onPageChange={handlePageChange}
+            disabled={loading}
           />
         )}
-      </S.ResultsContainer>
-    </S.AppContainer>
+      </Container>
+    </ThemeProvider>
   );
 };
 
