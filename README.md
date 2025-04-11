@@ -22,7 +22,7 @@ A product search web application that uses Google's Custom Search API to retriev
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/mhasantuncer/search-api
+    git clone https://github.com/mhasantuncer/search-api.git
     cd search-api
     ```
 
