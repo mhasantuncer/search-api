@@ -45,8 +45,8 @@ A product search web application that uses Google's Custom Search API to retriev
     Create a `.env` file in the root directory and add your Google Custom Search API key and search engine ID:
 
     ```env
-    REACT_APP_GOOGLE_API_KEY=your-api-key
-    REACT_APP_GOOGLE_CX=your-search-engine-id
+    VITE_GOOGLE_API_KEY=your-api-key
+    VITE_GOOGLE_CX=your-search-engine-id
     ```
 
 4. **Start the development server:**
@@ -54,16 +54,10 @@ A product search web application that uses Google's Custom Search API to retriev
     Using npm:
 
     ```bash
-    npm start
+    npm run dev
     ```
 
-    Or using yarn:
-
-    ```bash
-    yarn start
-    ```
-
-    This will start the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    This will start the app in development mode. Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 ## Usage
 
