@@ -46,4 +46,4 @@ export const ViewButton = styled(Button)(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.palette.primary.dark,
   },
-}));
+})) as typeof Button;

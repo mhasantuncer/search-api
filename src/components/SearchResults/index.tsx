@@ -1,4 +1,3 @@
-import React from 'react';
 import { Grid, Typography, CircularProgress } from '@mui/material';
 import ProductCard from '../ProductCard';
 import * as S from './styles';
@@ -11,12 +10,12 @@ interface SearchResultsProps {
   error: string | null;
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({
+const SearchResults = ({
   results,
   loading,
   query,
   error,
-}) => {
+}: SearchResultsProps) => {
   if (loading) {
     return (
       <S.LoadingContainer>

@@ -21,7 +21,7 @@ const App = () => {
     setCurrentPage(1);
     handleSearch(query, 1);
   };
-  console.log(totalResults);
+
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg" sx={{ py: 4 }}>

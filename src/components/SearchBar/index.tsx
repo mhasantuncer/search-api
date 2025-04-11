@@ -9,12 +9,12 @@ interface SearchBarProps {
   onQueryChange: (value: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({
+const SearchBar = ({
   query,
   loading,
   onSearch,
   onQueryChange,
-}) => {
+}: SearchBarProps) => {
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') onSearch();
   };

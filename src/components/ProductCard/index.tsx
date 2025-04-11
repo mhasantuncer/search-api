@@ -1,4 +1,3 @@
-import React from 'react';
 import { CardContent, Box } from '@mui/material';
 import * as S from './styles';
 import { GoogleSearchResult } from '../../models/types';
@@ -7,7 +6,7 @@ interface ProductCardProps {
   product: GoogleSearchResult;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   const imageUrl = product.pagemap?.cse_image?.[0]?.src;
   const truncatedTitle =
     product.title.length > 60
@@ -38,6 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           fullWidth
           variant="contained"
           href={product.link}
+          target="_blank"
           rel="noopener noreferrer"
         >
           View Product
